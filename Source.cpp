@@ -101,8 +101,9 @@ void linked_list::reverse() {
 	}
 	data* tmp_end = head;
 	head = tail->prev;
+	head->prev = nullptr;
 	tail->next = nullptr;
-	tail->prev = tmp_end;
+	tmp_end->next = tail;
 }
 
 bool linked_list::is_empty() {

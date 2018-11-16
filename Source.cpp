@@ -1,5 +1,6 @@
 #include <iostream>
 #include <conio.h>
+#include <Windows.h>
 
 struct data{
 	data() {
@@ -17,8 +18,8 @@ protected:
 	virtual ~collection() {}
 
 	virtual bool is_empty() = 0;
-	//virtual size_t size() = 0;
-	//virtual void reverse() = 0;
+	virtual size_t size() = 0;
+	virtual void reverse() = 0;
 };
 
 class linked_list : public collection {
@@ -37,7 +38,8 @@ public:
 	void read();
 	void push_back(int);
 	void push_front(int);
-	//int* remove();
+	data* find(int);
+	int remove(int);
 };
 
 int main() {
@@ -48,6 +50,8 @@ int main() {
 	}
 	list.read();
 	list.reverse();
+	list.read();
+	list.remove(2);
 	list.read();
 
 	_getch();
@@ -119,3 +123,26 @@ size_t linked_list::size() {
 	}
 	return count;
 }
+
+int linked_list::remove(int val) {
+	data* p_val = find(val);
+	if (p_val != tail) {
+		p_val->prev->next = p_val->next;
+		p_val->next->prev = p_val->prev;
+		//delete p_val;
+	}else {
+		std::cout << "Value has not been found" << std::endl;
+	}return p_val->value;
+}
+
+data* linked_list::find(int val) {
+	data* tmp = head;
+	while (tmp != tail) {
+		if (tmp->value == val) {
+			break;
+		}else {
+			tmp = tmp->next;
+		}
+	}return tmp;
+}
+

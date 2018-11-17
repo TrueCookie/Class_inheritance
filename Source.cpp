@@ -1,46 +1,8 @@
 #include <iostream>
 #include <conio.h>
 #include <Windows.h>
-
-struct data{
-	data() {
-		prev = nullptr;
-		next = nullptr;
-	}
-	int value;
-	data* prev;
-	data* next;
-};
-
-class collection{
-protected:
-	collection() {}
-	virtual ~collection() {}
-
-	virtual bool is_empty() = 0;
-	virtual size_t size() = 0;
-	virtual void reverse() = 0;
-};
-
-class linked_list : public collection {
-private:
-	data* head;
-	data* tail;
-public:
-	linked_list() {
-		head = nullptr;
-		tail = head;
-	}
-	bool is_empty();
-	void reverse();
-	size_t size();
-
-	void read();
-	void push_back(int);
-	void push_front(int);
-	data* find(int);
-	int remove(int);
-};
+#include "data.h"
+#include "linked_list.h"
 
 int main() {
 	linked_list list;
